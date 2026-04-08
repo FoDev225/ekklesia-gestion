@@ -1,0 +1,44 @@
+.believer-section {
+    background: #f9f9fb;
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-top: 20px;
+    border: 2px solid #f4f4fc;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.believer-section h5 {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #111 !important;
+    border-left: 4px solid #0d6efd;
+    padding-left: 10px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.believer-info strong {
+    color: #0d6efd;
+}
+
+.believer-info {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.badge.bg-light {
+    border: 1px solid #0d6efd;
+}
+
+.card {
+    border-radius: 12px;
+}
+
+.card-header h4 {
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.btn-warning i, .btn-secondary i {
+    margin-right: 4px;
+}

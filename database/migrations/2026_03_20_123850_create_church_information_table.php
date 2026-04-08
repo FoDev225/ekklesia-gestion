@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('church_information', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('believer_id')->nullable()->constrained('believers')->nullOnDelete();
+            $table->string('connaissance_eglise')->nullable();
+            $table->string('original_church')->nullable();
+            $table->string('arrival_year')->nullable();
+            $table->date('conversion_date')->nullable();
+            $table->string('conversion_place')->nullable();
+            $table->enum('baptised', ['Oui', 'Non'])->default('Non');
+            $table->date('baptism_date')->nullable();
+            $table->string('baptism_place')->nullable();
+            $table->string('baptism_pastor')->nullable();
+            $table->string('baptism_card_number')->nullable();
+            $table->string('membership_card_number')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('church_information');
+    }
+};
