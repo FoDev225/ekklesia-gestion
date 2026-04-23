@@ -45,6 +45,6 @@ class PasswordController extends Controller
             'must_change_password' => false
         ]);
 
-        return redirect()->route('admin.menu.dashboard')->with('success', 'Votre mot de passe a été changé avec succès.');
+        return redirect()->route('admin.believers.statistics')->with('success', 'Votre mot de passe a été changé avec succès.');
     }
 }

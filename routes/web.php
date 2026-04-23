@@ -23,10 +23,11 @@ Route::middleware(['auth', 'force.password.change', 'ensure.user.active', 'auto.
     ->group(function () {
 
     Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('menu.dashboard');
+    // STATISTICS ROUTE
+    Route::get('statistics', [App\Http\Controllers\Admin\StatisquesController::class, 'index'])->name('believers.statistics');
 
     // BELIEVERS CATEGORY ROUTES
     Route::resource('categories', App\Http\Controllers\Admin\BelieversCategoryController::class)->except(['show']);
-    Route::get('believers/stats', [App\Http\Controllers\Admin\StatsController::class, 'index'])->name('believers.stats');
 
     // SEARCH BELIEVERS ROUTE
     Route::get('believers/search', [App\Http\Controllers\Admin\BelieverController::class, 'search'])->name('believers.search');
@@ -58,10 +59,8 @@ Route::middleware(['auth', 'force.password.change', 'ensure.user.active', 'auto.
     // LOGIN HISTORY ROUTE
     Route::get('login-histories', [App\Http\Controllers\Admin\LoginHistoryController::class, 'index'])->name('login.histories');
 
-
     // ROLE MANAGEMENT ROUTES
     Route::resource('roles', App\Http\Controllers\Admin\RoleController::class)->except(['show']);
-
 
     // CHURCH INFO ROUTES
     Route::resource('church_info', App\Http\Controllers\Admin\ChurchInfoController::class);
@@ -84,9 +83,6 @@ Route::middleware(['auth', 'force.password.change', 'ensure.user.active', 'auto.
     // PROGRAM ROUTES
     Route::resource('programs', App\Http\Controllers\Admin\ProgramController::class);
 
-    // STATISTICS ROUTE
-    Route::get('statistics', [App\Http\Controllers\Admin\StatisquesController::class, 'index'])->name('believers.statistics');
-
     // GROUPS ROUTES
     Route::resource('groups', App\Http\Controllers\Admin\GroupController::class);
     Route::post('groups/{group}/assign-believer', [App\Http\Controllers\Admin\GroupController::class, 'assignBeliever'])
@@ -100,4 +96,55 @@ Route::middleware(['auth', 'force.password.change', 'ensure.user.active', 'auto.
 
     Route::get('groups/{group}/export-pdf', [App\Http\Controllers\Admin\GroupController::class, 'exportMembersPdf'])
         ->name('groups.exportPdf');
+
+    // TEAM ROUTES
+    Route::resource('teams', App\Http\Controllers\Admin\TeamController::class);
+
+    Route::post('teams/{team}/assign-believer', [App\Http\Controllers\Admin\TeamController::class, 'assignBeliever'])
+        ->name('teams.assignBeliever');
+
+    Route::delete('teams/{team}/remove-believer/{believer}', [App\Http\Controllers\Admin\TeamController::class, 'removeBeliever'])
+        ->name('teams.removeBeliever');
+
+    Route::get('/teams/{team}/export-excel', [App\Http\Controllers\Admin\TeamController::class, 'exportExcel'])->name('teams.exportExcel');
+    Route::get('/teams/{team}/export-pdf', [App\Http\Controllers\Admin\TeamController::class, 'exportPdf'])->name('teams.exportPdf');
+
+    // ACTIVITY PROGRAM ROUTES
+    Route::get('/teams/{team}/activities', [App\Http\Controllers\Admin\ActivityProgramController::class, 'index'])->name('teams.activities.index');
+    Route::get('/teams/{team}/activities/create', [App\Http\Controllers\Admin\ActivityProgramController::class, 'create'])->name('teams.activities.create');
+    Route::post('/teams/{team}/activities', [App\Http\Controllers\Admin\ActivityProgramController::class, 'store'])->name('teams.activities.store');
+
+    Route::get('/teams/{team}/activities/{activity}', [App\Http\Controllers\Admin\ActivityProgramController::class, 'show'])->name('teams.activities.show');
+    Route::get('/teams/{team}/activities/{activity}/edit', [App\Http\Controllers\Admin\ActivityProgramController::class, 'edit'])->name('teams.activities.edit');
+    Route::put('/teams/{team}/activities/{activity}', [App\Http\Controllers\Admin\ActivityProgramController::class, 'update'])->name('teams.activities.update');
+    Route::delete('/teams/{team}/activities/{activity}', [App\Http\Controllers\Admin\ActivityProgramController::class, 'destroy'])->name('teams.activities.destroy');
+
+    // TEAM OBJECTIVE ROUTES
+    Route::resource('teams.objectives', App\Http\Controllers\Admin\TeamObjectiveController::class)->except(['show']);
+
+    // TEAM ACTIVITY EXPENSE ROUTES
+    Route::prefix('teams/{team}/activities/{activity}')->name('teams.activities.')->group(function () {
+        Route::post('/expenses', [App\Http\Controllers\Admin\TeamActivityExpenseController::class, 'store'])->name('expenses.store');
+        Route::put('/expenses/{expense}', [App\Http\Controllers\Admin\TeamActivityExpenseController::class, 'update'])->name('expenses.update');
+        Route::delete('/expenses/{expense}', [App\Http\Controllers\Admin\TeamActivityExpenseController::class, 'destroy'])->name('expenses.destroy');
+    });
+
+    Route::post('/teams/{team}/activities/{activityProgram}/documents', 
+        [App\Http\Controllers\Admin\TeamActivityDocumentController::class, 'store']
+    )->name('teams.activities.documents.store');
+
+    Route::delete('/teams/{team}/activities/{activityProgram}/documents/{document}', 
+        [App\Http\Controllers\Admin\TeamActivityDocumentController::class, 'destroy']
+    )->name('teams.activities.documents.destroy');
+
+    Route::get('/admin/teams/{team}/activities/report', 
+        [App\Http\Controllers\Admin\ActivityProgramController::class, 'annualReport']
+    )->name('teams.activities.annualReport');
+
+    // PERIODES ROUTES
+    Route::resource('periodes', App\Http\Controllers\Admin\PeriodeController::class);
+    Route::patch('periodes/{periode}/activate', [App\Http\Controllers\Admin\PeriodeController::class, 'activate'])->name('periodes.activate');
+
+    // SERVICES ROUTES
+    Route::resource('services', App\Http\Controllers\Admin\ServiceController::class);
 });

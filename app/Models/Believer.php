@@ -224,4 +224,16 @@ class Believer extends Model
     {
         return $this->belongsTo(Family::class);
     }
+
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class, 'believer_team')
+            ->withPivot('role', 'joined_at')
+            ->withTimestamps();
+    }
+
+    public function serviceAssignments()
+    {
+        return $this->hasMany(ServiceAssignment::class);
+    }
 }

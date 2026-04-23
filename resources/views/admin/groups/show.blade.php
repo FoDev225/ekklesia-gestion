@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Détail groupe')
+
 @section('content')
 <div class="container-fluid">
 
@@ -36,10 +38,10 @@
 
     <div class="card shadow-sm border-0 mb-4">
         <div class="card-header bg-white border-bottom">
-            <strong><i class="fas fa-filter me-2 text-primary"></i>Filtres & Exports</strong>
+            <strong><i class="fas fa-filter me-2 text-primary"></i>Exports de la liste du groupe</strong>
         </div>
         <div class="card-body">
-            <form method="GET" action="{{ route('admin.groups.show', $group) }}">
+            {{-- <form method="GET" action="{{ route('admin.groups.show', $group) }}">
                 <div class="row g-3 align-items-end">
                     <div class="col-md-6">
                         <label class="form-label">Recherche</label>
@@ -65,14 +67,14 @@
                         </button>
                     </div>
                 </div>
-            </form>
+            </form> --}}
 
-            <hr class="my-4">
+            {{-- <hr class="my-4"> --}}
 
             <div class="d-flex flex-wrap gap-2">
-                <a href="{{ route('admin.groups.show', $group) }}" class="btn btn-outline-secondary">
+                {{-- <a href="{{ route('admin.groups.show', $group) }}" class="btn btn-outline-secondary">
                     <i class="fas fa-rotate-left me-1"></i> Réinitialiser
-                </a>
+                </a> --}}
 
                 <a href="{{ route('admin.groups.exportExcel', array_merge(['group' => $group->id], request()->only('search', 'gender', 'role'))) }}"
                 class="btn btn-success">
@@ -89,7 +91,7 @@
 
     <div class="row">
         {{-- FORMULAIRE D’ATTRIBUTION --}}
-        <div class="col-lg-4 mb-4">
+        <div class="col-lg-3 mb-4">
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-primary text-white">
                     <strong><i class="fas fa-user-plus me-2"></i>Attribuer un fidèle</strong>
@@ -165,7 +167,7 @@
         </div>
 
         {{-- LISTE DES MEMBRES --}}
-        <div class="col-lg-8 mb-4">
+        <div class="col-lg-9 mb-4">
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-white border-bottom">
                     <strong><i class="fas fa-users me-2 text-primary"></i>Membres du groupe</strong>

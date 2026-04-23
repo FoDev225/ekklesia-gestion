@@ -88,8 +88,31 @@
         <div id="louange" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Registres</h6>
+                <h6 class="collapse-header">Groupes</h6>
                 <a class="collapse-item" href="{{ route('admin.groups.index') }}">Liste des groupes</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+        <!-- Heading -->
+    <div class="sidebar-heading">
+        Gestion des Equipes
+    </div>
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#team"
+            aria-expanded="true" aria-controls="team">
+            <i class="fas fa-ring"></i>
+            <span>Gestion des Equipes</span>
+        </a>
+        <div id="team" class="collapse" aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Equipes</h6>
+                <a class="collapse-item" href="{{ route('admin.teams.index') }}">Liste des équipes</a>
             </div>
         </div>
     </li>

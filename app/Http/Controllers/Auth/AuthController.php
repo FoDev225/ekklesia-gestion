@@ -15,7 +15,7 @@ class AuthController extends Controller
     public function login()
     {
         if (Auth::check()) {
-            return redirect()->route('admin.menu.dashboard');
+            return redirect()->route('admin.believers.statistics');
         }
 
         return view('auth.login');
@@ -59,7 +59,7 @@ class AuthController extends Controller
         }
 
         // Redirect to intended route or dashboard
-        return redirect()->route('admin.menu.dashboard');
+        return redirect()->route('admin.believers.statistics');
     }
 
     private function logLogin(Request $request, $userId, bool $success)

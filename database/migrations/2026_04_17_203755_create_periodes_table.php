@@ -13,10 +13,16 @@ return new class extends Migration
     {
         Schema::create('periodes', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // Nom de la période (ex: "Octobre 2024- Février 2025")
-            $table->text('general_theme')->nullable(); // Thème général de la période
+
+            $table->string('name'); // Mars - Juillet 2026
+            $table->string('general_theme')->nullable(); // Thème général de la période
+
             $table->date('start_date'); // Date de début de la période
             $table->date('end_date'); // Date de fin de la période
+
+            $table->boolean('is_active')->default(true); // Indique si la période est active
+            $table->boolean('is_archived')->default(false); // Historique
+            
             $table->timestamps();
         });
     }

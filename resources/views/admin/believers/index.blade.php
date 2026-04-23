@@ -115,8 +115,8 @@
                 </div>
             </div>
 
-            <a href="{{ route('admin.menu.dashboard') }}" class="btn btn-outline-light text-info">
-                <i class="bi bi-arrow-left"></i> Retour au Menu
+            <a href="{{ route('admin.believers.statistics') }}" class="btn btn-outline-light text-info">
+                <i class="bi bi-arrow-left"></i> Retour au tableau de bord
             </a>
         </div>
 

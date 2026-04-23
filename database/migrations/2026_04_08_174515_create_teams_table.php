@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('culte_roles', function (Blueprint $table) {
+        Schema::create('teams', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
-            $table->string('description');
+            $table->string('name')->unique();
+            $table->text('description')->nullable();
+            $table->string('objectif')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('culte_roles');
+        Schema::dropIfExists('teams');
     }
 };

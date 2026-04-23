@@ -24,4 +24,9 @@ class Group extends Model
     {
         return $this->believers()->count();
     }
+
+    public function serviceAssignments()
+    {
+        return $this->hasMany(ServiceAssignment::class);
+    }
 }

@@ -2,25 +2,27 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Membres du groupe</title>
+    <title>Liste des membres - {{ $team->name }}</title>
     <style>
         @page {
             margin: 140px 30px 120px 30px; /* top - right - bottom - left */
         }
         body {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 13px;
+            font-family: 'Montserrat';
+            font-size: 12px;
+            color: #222;
         }
 
         h2 {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 5px;
         }
 
         p {
             text-align: center;
             margin-top: 0;
             margin-bottom: 20px;
+            color: #555;
         }
 
         table {
@@ -29,8 +31,8 @@
         }
 
         table th, table td {
-            border: 1px solid #333;
-            padding: 6px;
+            border: 1px solid #999;
+            padding: 8px;
             text-align: left;
         }
 
@@ -96,31 +98,29 @@
         <hr>
     </div>
 
-    <h2>Liste des membres du groupe : {{ $group->name }}</h2>
-    <p>Total : {{ $members->count() }} fidèle(s)</p>
+    <h2>Liste des membres de l’équipe : {{ $team->name }}</h2>
+    <p>Total : {{ $believers->count() }} fidèle(s)</p>
 
     <table>
         <thead>
             <tr>
                 <th>#</th>
                 <th>Nom</th>
-                <th>Prénom(s)</th>
+                <th>Prénom</th>
                 <th>Sexe</th>
-                <th>Date de naissance</th>
                 <th>Téléphone</th>
                 <th>Rôle</th>
                 <th>Date d’intégration</th>
             </tr>
         </thead>
         <tbody>
-            @forelse($members as $i => $believer)
+            @forelse($believers as $i => $believer)
                 <tr>
                     <td>{{ $i + 1 }}</td>
                     <td>{{ $believer->lastname }}</td>
                     <td>{{ $believer->firstname }}</td>
                     <td>{{ $believer->gender }}</td>
-                    <td>{{ $believer->birth_date ? \Carbon\Carbon::parse($believer->birth_date)->format('d/m/Y') : '-' }}</td>
-                    <td>{{ $believer->address->whatsapp_number ?? '-' }}</td>
+                    <td>{{ optional($believer->address)->whatsapp_number }}</td>
                     <td>{{ $believer->pivot->role ?? '-' }}</td>
                     <td>
                         {{ $believer->pivot->joined_at ? \Carbon\Carbon::parse($believer->pivot->joined_at)->format('d/m/Y') : '-' }}
@@ -128,7 +128,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6" style="text-align:center;">Aucun membre trouvé.</td>
+                    <td colspan="7" style="text-align: center;">Aucun fidèle trouvé.</td>
                 </tr>
             @endforelse
         </tbody>

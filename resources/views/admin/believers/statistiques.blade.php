@@ -113,7 +113,7 @@
             <div class="row g-4 mb-4">
 
                 <!-- Total fidèles -->
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-3 col-xl-3">
                     <div class="card stat-card shadow-sm border-0 h-100">
                         <div class="card-body d-flex align-items-center justify-content-between">
                             <div>
@@ -128,7 +128,7 @@
                 </div>
 
                 <!-- Actifs -->
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-3 col-xl-3">
                     <div class="card stat-card shadow-sm border-0 h-100">
                         <div class="card-body d-flex align-items-center justify-content-between">
                             <div>
@@ -143,7 +143,7 @@
                 </div>
 
                 <!-- Inactifs -->
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-3 col-xl-3">
                     <div class="card stat-card shadow-sm border-0 h-100">
                         <div class="card-body d-flex align-items-center justify-content-between">
                             <div>
@@ -158,7 +158,7 @@
                 </div>
 
                 <!-- Taux baptême -->
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-3 col-xl-3">
                     <div class="card stat-card shadow-sm border-0 h-100">
                         <div class="card-body d-flex align-items-center justify-content-between">
                             <div>
@@ -174,7 +174,7 @@
                 </div>
 
                 <!-- Discipline -->
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-3 col-xl-3">
                     <div class="card stat-card shadow-sm border-0 h-100">
                         <div class="card-body d-flex align-items-center justify-content-between">
                             <div>
@@ -190,7 +190,7 @@
                 </div>
 
                 <!-- Départs -->
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-3 col-xl-3">
                     <div class="card stat-card shadow-sm border-0 h-100">
                         <div class="card-body d-flex align-items-center justify-content-between">
                             <div>
@@ -205,7 +205,7 @@
                 </div>
 
                 <!-- Décès -->
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-3 col-xl-3">
                     <div class="card stat-card shadow-sm border-0 h-100">
                         <div class="card-body d-flex align-items-center justify-content-between">
                             <div>
@@ -219,7 +219,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-3 col-xl-3">
                     <div class="card stat-card shadow-sm border-0 h-100">
                         <div class="card-body d-flex align-items-center justify-content-between">
                             <div>

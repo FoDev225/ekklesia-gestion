@@ -16,20 +16,12 @@ class GroupSeeder extends Seeder
         $groups = [
             // Groupes de louange
             ['name' => 'Groupe Musical', 'description' => 'Groupe principal des instrumentistes'],
-            ['name' => 'DEXY', 'description' => 'Groupe de louange DEXY'],
-            ['name' => 'Chorale EDEN', 'description' => 'Chorale EDEN'],
+            ['name' => 'DEXY', 'description' => 'Divine Espérance Xylophone de Yopougon'],
+            ['name' => 'Chorale EDEN', 'description' => 'Chorale balafon EDEN'],
             ['name' => 'Chorale HOREB', 'description' => 'Chorale Horeb'],
             ['name' => 'Chorale Sainte Cohorte', 'description' => 'Chorale Sainte Cohorte'],
-
-            // Autres groupes
-            ['name' => 'Evangélisation', 'description' => 'Équipe d’évangélisation'],
-            ['name' => 'AFEBECI', 'description' => 'Groupe des femmes'],
-            ['name' => 'J-AEBECI', 'description' => 'Groupe des jeunes'],
-            ['name' => 'Prière', 'description' => 'Ministère de prière'],
-            ['name' => 'Cellule sociale', 'description' => 'Cellule d’action sociale'],
             ['name' => 'Ordre et Accueil', 'description' => 'Service d’ordre et d’accueil'],
             ['name' => 'Nettoyage', 'description' => 'Équipe de nettoyage'],
-            ['name' => 'Organisation', 'description' => 'Équipe d’organisation des événements'],
         ];
 
         foreach ($groups as $group) {

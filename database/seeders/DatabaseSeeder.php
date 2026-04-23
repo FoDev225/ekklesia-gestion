@@ -62,6 +62,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             BelieverTableSeeder::class,
             GroupSeeder::class,
+            TeamSeeder::class,
         ]);
     }
 }
