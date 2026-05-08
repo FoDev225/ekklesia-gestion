@@ -13,6 +13,8 @@ use App\Observers\BelieverObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
+    public const HOME = '/redirect-user';
+    
     /**
      * Register any application services.
      */

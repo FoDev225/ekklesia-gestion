@@ -24,6 +24,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 'force.password.change' => ForcePasswordChange::class,
                 'ensure.user.active' => EnsureUserIsActive::class,
                 'auto.logout' => AutoLogout::class,
+                'role' => App\Http\Middleware\RoleMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

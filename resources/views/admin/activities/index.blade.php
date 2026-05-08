@@ -18,6 +18,12 @@
                 <a href="{{ route('admin.teams.show', $team) }}" class="btn btn-outline-secondary">
                     <i class="fas fa-arrow-left me-1"></i> Retour
                 </a>
+
+                <a href="{{ route('admin.teams.objectives.create', $team) }}"
+                    class="btn btn-primary">
+                        <i class="fas fa-bullseye me-1"></i>
+                        Nouvel objectif annuel
+                </a>
             </div>
         </div>
 

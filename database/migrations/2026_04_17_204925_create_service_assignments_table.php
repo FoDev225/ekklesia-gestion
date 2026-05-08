@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('believer_id')->constrained()->onDelete('cascade')->nullable();
-            $table->foreignId('service_id')->constrained()->onDelete('cascade');
-            $table->foreignId('service_role_id')->constrained()->onDelete('cascade');
-            $table->foreignId('group_id')->constrained()->onDelete('cascade');
+            $table->foreignId('service_id')->constrained()->onDelete('cascade')->nullable();
+            $table->foreignId('service_role_id')->constrained()->onDelete('cascade')->nullable();
+            $table->foreignId('group_id')->constrained()->onDelete('cascade')->nullable();
 
             $table->boolean('is_backup')->default(false);
             $table->unique(['service_id', 'service_role_id', 'believer_id'], 'unique_assignment_person');

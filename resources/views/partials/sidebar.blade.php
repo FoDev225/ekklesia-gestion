@@ -122,6 +122,29 @@
 
         <!-- Heading -->
     <div class="sidebar-heading">
+        Gestion des cultes
+    </div>
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#culte"
+            aria-expanded="true" aria-controls="culte">
+            <i class="fas fa-ring"></i>
+            <span>Gestion des cultes</span>
+        </a>
+        <div id="culte" class="collapse" aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Cultes</h6>
+                <a class="collapse-item" href="{{ route('admin.services.calendar') }}">Programme des cultes</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+        <!-- Heading -->
+    <div class="sidebar-heading">
         Gestion des Rôles
     </div>
     <!-- Nav Item - Utilities Collapse Menu -->

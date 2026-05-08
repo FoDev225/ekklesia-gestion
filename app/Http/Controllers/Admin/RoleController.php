@@ -35,9 +35,10 @@ class RoleController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:roles,name',
+            'code' => 'nullable|string|max:255|unique:roles,code',
         ]);
 
-        Role::create($request->only('name'));
+        Role::create($request->only('name', 'code'));
 
         return redirect()->route('admin.roles.index')->with('success', 'Rôle créé avec succès.');
     }
@@ -65,9 +66,10 @@ class RoleController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:roles,name,' . $role->id,
+            'code' => 'nullable|string|max:255|unique:roles,code,' . $role->id,
         ]);
 
-        $role->update($request->only('name'));
+        $role->update($request->only('name', 'code'));
 
         return redirect()->route('admin.roles.index')->with('success', 'Rôle mis à jour avec succès.');
     }

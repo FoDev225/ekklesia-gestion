@@ -15,7 +15,8 @@ class AuthController extends Controller
     public function login()
     {
         if (Auth::check()) {
-            return redirect()->route('admin.believers.statistics');
+            // Redirect user according to role
+            return redirect('/redirect-user');
         }
 
         return view('auth.login');
@@ -33,7 +34,7 @@ class AuthController extends Controller
         // Utilisateur inexistant
         if (!$user) {
             $this->logLogin($request, null, false);
-            return back()->withErrors(['username' => 'Le nom utilisateur fourni est incorrect.'])->onlyInput('username');
+            return back()->withErrors(['username' => 'Le nom utilisateur fourni n\'existe pas.'])->onlyInput('username');
         }
 
         // Compte désactivé
@@ -59,7 +60,7 @@ class AuthController extends Controller
         }
 
         // Redirect to intended route or dashboard
-        return redirect()->route('admin.believers.statistics');
+        return redirect('/redirect-user');
     }
 
     private function logLogin(Request $request, $userId, bool $success)

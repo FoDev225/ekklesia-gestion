@@ -43,7 +43,7 @@
                     <tbody>
                         @forelse($departures as $i => $d)
                             <tr>
-                                <td>{{ $i + 1 }}</td>
+                                <td>{{ $departures->firstItem() + $i }}</td>
                                 <td>{{ optional($d->believer)->firstname }} {{ optional($d->believer)->lastname }}</td>
                                 <td>
                                     @if($d->type == 'quit')
@@ -56,7 +56,7 @@
                                 <td>{{ $d->reason }}</td>
                                 <td>
                                     @if($d->believer && $d->believer->canBeReintegrated())
-                                        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#quitterModal" 
+                                        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#quitterModal{{ $d->id }}" 
                                             data-toggle="tooltip" data-placement="bottom" title="Quitter la communauté">
                                             Réintégrer
                                         </button>
@@ -64,6 +64,42 @@
                                     
                                 </td>
                             </tr>
+                            <!-- Réintegrer le fidèle -->
+                            <div class="modal fade" 
+                                id="quitterModal{{ $d->id }}" 
+                                tabindex="-1" 
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-success">
+                                        <h5 class="modal-title text-light text-uppercase" id="quitterModalLabel">
+                                            Confirmer la réintégration
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>
+                                            Voulez-vous réintegrer le fidèle 
+                                            <strong>{{ $d->believer->lastname }} 
+                                                {{ $d->believer->firstname }}
+                                            </strong> ?
+                                        </p>
+                                        <p class="text-muted mb-0"><small>Cette action réintègre le fidèle dans la communauté.</small></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annuler</button>
+                                        <form action="{{ route('admin.believers.reintegrate', $d->believer->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit" class="btn btn-success">
+                                                Confirmer
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
                         @empty
                             <tr>
                                 <td colspan="6" class="text-center">Aucun depart trouvé.</td>
@@ -71,32 +107,6 @@
                         @endforelse
                     </tbody>
                 </table>
-
-                <!-- Réintegrer le fidèle -->
-                <div class="modal fade" id="quitterModal" tabindex="-1" aria-labelledby="quitterModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header bg-success">
-                            <h5 class="modal-title text-light text-uppercase" id="quitterModalLabel">Confirmer la réintégration</h5>
-                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Voulez-vous réintegrer le fidèle <strong>{{ $d->believer->lastname }} {{ $d->believer->firstname }}</strong> ?</p>
-                            <p class="text-muted mb-0"><small>Cette action réintègre le fidèle dans la communauté.</small></p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annuler</button>
-                            <form action="{{ route('admin.believers.reintegrate', $d->believer->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('PATCH')
-                                <button type="submit" class="btn btn-success">
-                                    Confirmer
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                    </div>
-                </div>
 
                 {{ $departures->links() }}
             </div>

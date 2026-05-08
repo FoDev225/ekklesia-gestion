@@ -49,10 +49,11 @@ class GroupController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:groups,name',
+            'type_gp' => 'nullable|string|max:255',
             'description' => 'nullable|string',
         ]);
 
-        Group::create($request->only('name', 'description'));
+        Group::create($request->only('name', 'type_gp', 'description'));
 
         return redirect()->route('admin.groups.index')->with('success', 'Groupe créé avec succès.');
     }
@@ -152,10 +153,11 @@ class GroupController extends Controller
      {
         $request->validate([
             'name' => 'required|string|max:255|unique:groups,name,' . $group->id,
+            'type_gp' => 'nullable|string|max:255',
             'description' => 'nullable|string',
         ]);
 
-        $group->update($request->only('name', 'description'));
+        $group->update($request->only('name', 'type_gp', 'description'));
 
         return redirect()->route('admin.groups.index')->with('success', 'Groupe mis à jour avec succès.');
     }

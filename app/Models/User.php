@@ -20,6 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'username',
+        'team_id',
         'email',
         'password',
         'is_active',
@@ -58,7 +59,7 @@ class User extends Authenticatable
     // Relation with Role model
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class, 'role_user');
     }
 
     // Relation with Believer model
@@ -70,13 +71,23 @@ class User extends Authenticatable
     // Check if user has a specific role
     public function hasRole($role)
     {
-        return $this->roles()->where('slug', $role)->exists();
+        return $this->roles()->where('code', $role)->exists();
+    }
+
+    public function hasAnyRole(array $roles)
+    {
+        return $this->roles()->whereIn('code', $roles)->exists();
+    }
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
     }
 
     // Assign a role to the user
     public function assignRole($role)
     {
-        $roleModel = Role::where('slug', $role)->first();
+        $roleModel = Role::where('code', $role)->first();
         if ($roleModel) {
             $this->roles()->attach($roleModel); // Attach the role to the user
         }

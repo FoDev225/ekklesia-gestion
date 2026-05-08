@@ -100,9 +100,9 @@ class BelieverImport implements ToCollection, WithHeadingRow, SkipsEmptyRows
                 $this->errorCount++;
                 $this->report[] = [
                     'line' => $excelRow,
-                    'status' => 'Erreur',
+                    'status' => 'Importé avec erreurs',
                     'name' => trim(($row['lastname'] ?? '') . ' ' . ($row['firstname'] ?? '')),
-                    'message' => implode(' | ', $validator->errors()->all()),
+                    'errors' => ['Import réussi'],
                 ];
                 continue;
             }
@@ -155,7 +155,7 @@ class BelieverImport implements ToCollection, WithHeadingRow, SkipsEmptyRows
                     'line' => $excelRow,
                     'status' => 'Erreur',
                     'name' => trim(($row['lastname'] ?? '') . ' ' . ($row['firstname'] ?? '')),
-                    'message' => $e->getMessage(),
+                    'errors' => [$e->getMessage()],
                 ];
             }
         }

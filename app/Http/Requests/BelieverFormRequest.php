@@ -39,7 +39,7 @@ class BelieverFormRequest extends FormRequest
             'ethnicity' => 'required|string|max:100',
             'nationality' => 'required|string|max:100',
             'number_of_children' => 'nullable|integer|min:0',
-            'cni_number' => 'nullable|string|max:100',
+            'cni_number' => 'nullable|string|max:50|unique:believers,cni_number,' . $believerId,
 
             // ADDRESS
             'address' => 'nullable|array',

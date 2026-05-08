@@ -18,6 +18,7 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('username')->unique();
+            $table->foreignId('team_id')->nullable()->constrained()->nullOnDelete();
             $table->string('email')->nullable()->unique();
             $table->string('password');
 

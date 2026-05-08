@@ -11,31 +11,36 @@ class Role extends Model
 
     protected $fillable = [
         'name',
-        'slug',
+        'code',
     ];
 
-    protected static function boot()
+    public function users()
     {
-        parent::boot();
-
-        static::creating(function ($model) {
-            $model->slug = Str::slug($model->name);
-        });
+        return $this->belongsToMany(User::class, 'role_user');
     }
 
-    protected static function booted()
-    {
-        static::creating(function ($model) {
-            $slug = Str::slug($model->name);
-            $count = static::where('slug', 'like', "{$slug}%")->count();
+    // protected static function boot()
+    // {
+    //     parent::boot();
 
-            $model->slug = $count ? "{$slug}-{$count}" : $slug;
-        });
+    //     static::creating(function ($model) {
+    //         $model->code = Str::slug($model->name);
+    //     });
+    // }
 
-        static::updating(function ($model) {
-            if ($model->isDirty('name')) {
-                $model->slug = Str::slug($model->name);
-            }
-        });
-    }
+    // protected static function booted()
+    // {
+    //     static::creating(function ($model) {
+    //         $slug = Str::slug($model->name);
+    //         $count = static::where('code', 'like', "{$slug}%")->count();
+
+    //         $model->code = $count ? "{$slug}-{$count}" : $slug;
+    //     });
+
+    //     static::updating(function ($model) {
+    //         if ($model->isDirty('name')) {
+    //             $model->code = Str::slug($model->name);
+    //         }
+    //     });
+    // }
 }

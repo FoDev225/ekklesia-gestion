@@ -56,12 +56,28 @@ class TeamController extends Controller
      */
     public function show(Team $team)
     {
+        $user = auth()->user();
+
+        // SUPER ADMIN
+        if (!$user->hasAnyRole(['pasteur', 'secretariat'])) {
+
+            // RESPONSABLE D'ÉQUIPE
+            if ($user->team_id != $team->id) {
+                abort(403, 'Accès refusé : Vous n\'êtes pas autorisé à accéder à cette équipe.');
+            }
+        }
+
+        // CHARGEMENT RELATIONS
         $team->load(['believers.address']);
 
+        // FIDÈLES DISPONIBLES
         $availableBelievers = Believer::whereDoesntHave('teams', function ($query) use ($team) {
             $query->where('teams.id', $team->id);
-        })->orderBy('lastname')->get();
+        })
+        ->orderBy('lastname')
+        ->get();
 
+        // STATISTIQUES
         $activitiesStats = [
             'total' => $team->activityPrograms()->count(),
             'scheduled' => $team->activityPrograms()->where('status', 'scheduled')->count(),
@@ -69,6 +85,7 @@ class TeamController extends Controller
             'completed' => $team->activityPrograms()->where('status', 'completed')->count(),
         ];
 
+        // ACTIVITÉS RÉCENTES
         $recentActivities = $team->activityPrograms()
             ->latest()
             ->take(5)
@@ -77,12 +94,12 @@ class TeamController extends Controller
         $year = request('year', now()->year);
 
         return view('admin.teams.show', compact(
-            'team', 
-            'availableBelievers', 
-            'activitiesStats', 
+            'team',
+            'availableBelievers',
+            'activitiesStats',
             'recentActivities',
-            'year')
-        );
+            'year'
+        ));
     }
 
     /**

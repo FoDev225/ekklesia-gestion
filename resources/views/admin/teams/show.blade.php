@@ -12,11 +12,7 @@
             <h1 class="h3 mb-1 text-gray-800">{{ $team->name }}</h1>
             <p class="mb-0 text-muted">{{ $team->description ?? 'Aucune description disponible.' }}</p>
         </div>
-        <a href="{{ route('admin.teams.objectives.create', $team) }}"
-            class="btn btn-primary mb-3">
-                <i class="fas fa-bullseye me-1"></i>
-                Nouvel objectif annuel
-        </a>
+        
         <a href="{{ route('admin.teams.index') }}" class="btn btn-secondary">
             <i class="fas fa-arrow-left me-1"></i> Retour
         </a>

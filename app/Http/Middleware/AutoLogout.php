@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class AutoLogout
 {
-    // Temps max d'inactivité en secondes (ex: 15 minutes = 900 secondes)
-    protected int $timeout = 900;
+    // Temps max d'inactivité en secondes (ex: 30 minutes = 1800 secondes)
+    protected int $timeout = 1800;
     /**
      * Handle an incoming request.
      *

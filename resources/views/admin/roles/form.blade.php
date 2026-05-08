@@ -38,6 +38,19 @@
                             @enderror
                         </div>
                     </div>
+
+                    <div class="col-md-6">
+                         {{-- CODE --}}
+                        <div class="form-group mb-3">
+                            <label for="code" class="form-label" style="color: #000;">Code du rôle <span class="text-danger">*</span></label>
+                            <input type="text" name="code" id="code"
+                                class="form-control @error('code') is-invalid @enderror" 
+                                value="{{ old('code', $role->code ?? '') }}" autofocus>
+                            @error('code')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

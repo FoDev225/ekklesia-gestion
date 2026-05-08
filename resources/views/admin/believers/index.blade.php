@@ -20,25 +20,34 @@
             </div>
         @endif
 
-        @if(session('import_errors') && count(session('import_errors')) > 0)
-            <div class="alert alert-warning">
-                <h5 class="mb-3">Erreurs d’import détectées :</h5>
-                <ul class="mb-0">
-                    @foreach(session('import_errors') as $error)
-                        <li class="mb-2">
-                            <strong>Ligne {{ $error['line'] }}</strong>
-                            @if(!empty($error['name']))
-                                — {{ $error['name'] }}
-                            @endif
-                            <ul>
-                                @foreach($error['error'] as $msg)
-                                    <li>{{ $msg }}</li>
-                                @endforeach
-                            </ul>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
+        {{-- DÉTAIL DES ERREURS UNIQUEMENT --}}
+        @if(session('import_report'))
+            @php
+                $errors = collect(session('import_report'))->where('status', 'Erreur');
+            @endphp
+
+            @if($errors->count())
+                <div class="alert alert-danger">
+                    <h5 class="mb-3">❌ Erreurs d’import détectées :</h5>
+
+                    <ul class="mb-0">
+                        @foreach($errors as $error)
+                            <li class="mb-2">
+                                <strong>Ligne {{ $error['line'] }}</strong>
+                                @if(!empty($error['name']))
+                                    — {{ $error['name'] }}
+                                @endif
+
+                                <ul class="mt-1">
+                                    @foreach($error['errors'] ?? [] as $msg)
+                                        <li>{{ $msg }}</li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         @endif
 
         @include('admin.believers.partials.import_rapport')

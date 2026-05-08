@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Services extends Model
+class Service extends Model
 {
     protected $table = 'services';
 
@@ -30,6 +30,11 @@ class Services extends Model
         return $this->belongsToMany(ServiceRole::class, 'service_assignments')
             ->withPivot(['believer_id', 'group_id', 'is_backup'])
             ->withTimestamps();
+    }
+
+    public function assignments()
+    {
+        return $this->hasMany(\App\Models\ServiceAssignment::class);
     }
 
     public function getAssignmentsByRole($code)
